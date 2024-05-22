@@ -1,0 +1,52 @@
+.img-back {
+    width: 100%;
+}
+
+.container-home {
+    margin-top: 8%;
+}
+
+.container-title{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.title {
+        line-height: 90px;
+        font-family: "Oleo Script Swash Caps";
+        font-size: 50px;
+        color: #000;
+}
+
+.container-img{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.img{
+    width: 30%;
+}
+
+.container-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 30%;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .container-img {
+        flex-direction: column;
+    }
+
+    .container-info {
+        margin-bottom: 10px;
+        width: 70%;
+    }
+    .img{
+        width: 50%;
+    }
+}

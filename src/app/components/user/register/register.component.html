@@ -1,0 +1,149 @@
+<div class="container-home">
+  <div class="container-login">
+    <div class="title">{{config.title}}</div>
+    <div class="container-img">
+      <img src="assets/img/login.jpg" alt="logo appland" class="img" />
+      <div class="container-info">
+        <form [formGroup]="loginForm" autocomplete="off" style="width: 100%">
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-control"
+              formControlName="email"
+              [placeholder]="config.enail"
+            />
+            <div
+              *ngIf="email.invalid && (email.dirty || email.touched)"
+              class="text-danger"
+            >
+              <div *ngIf="email.errors?.['required']">
+                {{ config.emailRequired }}
+              </div>
+              <div *ngIf="email.errors?.['email']">
+                {{ config.emailInvalid }}
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+              [placeholder]="config.password"
+            />
+            <div
+              *ngIf="pass.invalid && (pass.dirty || pass.touched)"
+              class="text-danger"
+            >
+              <div *ngIf="pass.errors?.['required']">
+                {{ config.passwordInvalid }}
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="dni"
+              [placeholder]="config.DNI"
+            />
+            <div
+              *ngIf="dni.invalid && (dni.dirty || dni.touched)"
+              class="text-danger"
+            >
+              <div *ngIf="dni.errors?.['required']">
+                {{ config.genericPending }}
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              [placeholder]="config.name"
+            />
+            <div
+              *ngIf="name.invalid && (name.dirty || name.touched)"
+              class="text-danger"
+            >
+              <div *ngIf="name.errors?.['required']">
+                {{ config.genericPending }}
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="lastName"
+              [placeholder]="config.lastName"
+            />
+            <div
+              *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+              class="text-danger"
+            >
+              <div *ngIf="lastName.errors?.['required']">
+                {{ config.genericPending }}
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="address"
+              [placeholder]="config.address"
+            />
+            <div
+              *ngIf="address.invalid && (address.dirty || address.touched)"
+              class="text-danger"
+            >
+              <div *ngIf="address.errors?.['required']">
+                {{ config.genericPending }}
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="number"
+              class="form-control"
+              formControlName="phone"
+              [placeholder]="config.phone"
+            />
+            <div
+              *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+              class="text-danger"
+            >
+              <div *ngIf="phone.errors?.['required']">
+                {{ config.genericPending }}
+              </div>
+              <div *ngIf="phone.errors?.['pattern']">
+                {{ config.errorPhone }}
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="referedCode"
+              [placeholder]="config.refered"
+            />
+          </div>
+          <button
+            type="submit"
+            class="button"
+            (click)="onRegister()"
+            [disabled]="!loginForm.valid"
+          >
+            {{config.btnRegister}}
+          </button>
+        </form>
+        <a href="login" class="forgot-password-link"
+          >{{config.messageLogin}} <span>{{config.linkLogin}}</span></a
+        >
+      </div>
+    </div>
+  </div>
+</div>

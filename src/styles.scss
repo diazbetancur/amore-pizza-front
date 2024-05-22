@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+
+
+.ng-valid:not(form).ng-touched {
+    border-left: 5px solid  #00ad44;
+}
+
+.ng-invalid:not(form).ng-touched {
+    border-left: 5px solid  #fd2c3a;
+}

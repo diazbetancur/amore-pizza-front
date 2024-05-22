@@ -1,0 +1,32 @@
+<div class="container-data">
+  <div class="container-restaurante" *ngFor="let restaurant of restaurants; let i = index"  [ngClass]="{'reversed': i % 2 === 1}">
+    <div class="container-restaurante__header">
+      <h1 class="container-restaurante__title">{{ restaurant.name }}</h1>
+      <p class="container-restaurante__description">{{ restaurant.description }}</p>
+    </div>
+    <div class="container-restaurante__body">
+      <div class="container-restaurante__body__image">
+        <img
+          src="assets/img/restaurant.jpg"
+          alt="Imagen del restaurante"
+          class="img"
+        />
+      </div>
+      <div class="container-restaurante__body__info">
+        <div class="container-restaurante__body__info__address">
+          <h2>Dirección</h2>
+          <p>{{ restaurant.address }}</p>
+        </div>
+        <div class="container-restaurante__body__info__phone">
+          <h2>Teléfono</h2>
+          <p>{{ restaurant.phone }}</p>
+        </div>
+        <div class="container-restaurante__body__info__schedule">
+          <h2>Horario</h2>
+          <p>{{ restaurant.scheduled }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="ubication_map"></div>
+  </div>
+</div>

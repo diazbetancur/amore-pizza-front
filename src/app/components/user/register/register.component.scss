@@ -1,0 +1,81 @@
+.img-back {
+    width: 100%;
+}
+
+.container-home {
+    margin-top: 8%;
+}
+
+.title {
+        line-height: 90px;
+        font-family: "Oleo Script Swash Caps";
+        font-size: 30px;
+        color: #000;
+}
+.img{
+    width: 30%;
+    margin-bottom: 10px;
+}
+.container-img{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.container-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 30%;
+    text-align: center;
+}
+.container-login{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    .container-img {
+        flex-direction: column;
+    }
+
+    .container-info {
+        margin-bottom: 10px;
+        width: 70%;
+    }
+    .img{
+        width: 50%;
+    }
+}
+
+.button {
+    background-color: #fd2c3a;
+    border: none;
+    color: white;
+    padding: 10px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .forgot-password-link {
+    text-align: center; 
+    color: #00ad44; 
+    text-decoration: underline; 
+    cursor: pointer; 
+    margin-bottom: 5px;
+  }
+  
+  .forgot-password-link:hover {
+    color: #fd2c3a; 
+  }

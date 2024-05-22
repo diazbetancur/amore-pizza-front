@@ -1,0 +1,37 @@
+<div class="container-data">
+  <!--<div>
+    <label for="categoryFilter">Filtrar por categoría:</label>
+    <select
+      id="categoryFilter"
+      [(ngModel)]="selectedCategory"
+      (change)="filterProducts()"
+    >
+      <option value="">Todas</option>
+      <option *ngFor="let category of uniqueCategories" [value]="category">
+        {{ category }}
+      </option>
+    </select>
+  </div> -->
+  <div
+    class="container-product"
+    *ngFor="let product of products; let i = index"
+  >
+    <div class="container-product__header">
+      <h1 class="container-product__title">{{ product.name }}</h1>
+    </div>
+    <div class="container-product__body">
+      <div class="container-product__body__image">
+        <img [src]="product.image" alt="Imagen del producto" class="img" />
+      </div>
+      <div class="container-product__body__info">
+        <div class="container-product__body__info__price">
+          <p>{{ product.description }}</p>
+        </div>
+        <div class="container-product__body__info__price">
+          <h2>Precio</h2>
+          <p>{{ product.price }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

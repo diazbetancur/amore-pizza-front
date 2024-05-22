@@ -1,0 +1,32 @@
+<header class="amore-pizza-header">
+  <nav>
+    <a class="navbar-brand no-decoration" href="#">
+      <img
+        src="assets/img/logo.png"
+        alt="Amore Pizza"
+        loading="lazy"
+        class="logo"
+      />
+    </a>
+    <input type="checkbox" class="checkbox" id="check" #check />
+    <div class="btn-menu-hamburguer" (click)="openMenu()">
+      <a class="{{ hamburgerMenuState }}">
+        <span></span>
+      </a>
+    </div>
+    <ul>
+      <li *ngFor="let option of links">
+        <ng-container [ngSwitch]="option.type">
+          <button type="button" *ngSwitchCase="'button'" class="button" [routerLink]="option.link">
+            {{ option.title }}
+          </button>
+          <ng-container *ngSwitchDefault>
+            <a [href]="option.link">
+              {{ option.title }}
+            </a>
+          </ng-container>
+        </ng-container>
+      </li>
+    </ul>
+  </nav>
+</header>

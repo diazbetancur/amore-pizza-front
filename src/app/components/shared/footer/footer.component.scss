@@ -1,0 +1,191 @@
+footer {
+  background-repeat: no-repeat;
+  background-color: #000;
+  background-size: cover;
+  float: left;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+
+  .container-footer {
+    max-width: auto;
+    position: relative;
+    padding: 10px;
+
+    .separator {
+      margin-top: 32px;
+      margin-bottom: 32px;
+    }
+
+    .container-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .stores {
+        display: flex;
+        gap: 12px;
+        margin-right: 30px;
+      }
+      .group-bancolombia {
+        .img-group-bancolombia {
+          width: 120px;
+        }
+      }
+
+      .appStore {
+        display: flex;
+      }
+    }
+
+    .container-middle {
+      display: flex;
+      justify-content: space-between;
+
+      label {
+        color: #fff;
+        font-size: 18px;
+        margin: 0;
+      }
+      .content-accordion a {
+        text-decoration: none;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 400;
+      }
+      .col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .content-accordion {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+      }
+    }
+
+    .container-end {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  footer {
+    background: #000;
+  }
+
+  .container-footer {
+    margin-top: 0px !important;
+    padding-top: 64px;
+    padding-left: 24px;
+    padding-right: 24px;
+
+    .logo-vigilado {
+      left: 0px !important;
+      bottom: 10% !important;
+    }
+  }
+  .container-top {
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: space-around !important;
+    margin-top: 20%;
+
+    .logo-nequi {
+      order: 1;
+      img {
+        width: 60%;
+      }
+    }
+
+    .appStore {
+      display: contents !important;
+    }
+
+    .stores {
+      width: 100%;
+      order: 3;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-evenly;
+      margin-right: 0px;
+      gap: 12px;
+      a {
+        width: 110px;
+      }
+    }
+    .group-bancolombia {
+      order: 2;
+    }
+  }
+  .container-middle {
+    flex-direction: column;
+    padding-top: 32px;
+    padding-left: 24px;
+
+    label {
+      color: #fff !important;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+
+      .ic-accordion {
+        margin-right: 32px;
+        display: flex;
+        transition: transform 0.3s ease;
+      }
+    }
+
+    .content-accordion {
+      max-height: 0;
+      overflow: hidden;
+      transition:
+        opacity 0.1s ease-in-out,
+        max-height 0.3s ease-in-out;
+      padding-left: 12px;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      opacity: 0;
+    }
+
+    input[type='checkbox']:checked {
+      & + label {
+        .ic-accordion {
+          transform: rotate(90deg);
+        }
+
+        + .content-accordion {
+          max-height: 400px;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+.hide {
+  display: none;
+}
+
+.powered-by{
+    width: 95%;
+    margin: 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: white;
+}
+
+.amore-pizza {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 1rem auto;
+}

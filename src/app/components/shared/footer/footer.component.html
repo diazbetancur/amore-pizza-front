@@ -1,0 +1,36 @@
+<footer>
+    <div class="container-footer">
+<!-- 
+      <hr class="separator" />
+      
+      <div class="container-middle">
+        <div class="col" *ngFor="let menu of itemsFooter">
+          <input type="checkbox" id="{{ menu.id }}" class="hide" />
+          <label for="{{ menu.id }}">
+            {{ menu.title }}
+            <i class="ic-accordion hide pi pi-angle-right"></i>
+          </label>
+          <div class="content-accordion">
+            <div *ngFor="let data of menu.subItemsFooter">
+              <a [href]="data.link">{{ data.label }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="separator" />-->
+      <div class="container-end">
+        <a *ngFor="let item of socialMedia" href="{{ item.link }}">
+            <img src="{{item.icon}}" alt="{{ item.name }}" />
+        </a>
+      </div>
+      <div class="amore-pizza">
+        AMORE PIZZA © 2022 
+      </div>
+      <div class="powered-by">
+        Powered by
+        <img src="assets/icons/logo-appland.png" alt="logo appland" style="width: 95px; margin-left: 5px;"/>
+      </div>
+      <hr class="separator hide show-mobile" />
+    </div>
+  </footer>
+  

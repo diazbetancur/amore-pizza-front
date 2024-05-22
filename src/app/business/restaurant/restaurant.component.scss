@@ -1,0 +1,73 @@
+.container-restaurante {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    background-color: #f8f9fa;
+}   
+.container-restaurante__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+.container-restaurante__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.container-restaurante__description {
+    font-size: 1rem;
+    font-weight: 400;
+}
+.container-restaurante__body {
+    display: flex;
+    flex-direction: column; /* Cambiado a columna para la vista móvil */
+    justify-content: center;
+    align-items: center; /* Centra los elementos horizontalmente */
+    padding: 10px;
+}
+.container-restaurante__body__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 10px;
+    width: 100%; /* Cambiado a 100% para ocupar todo el ancho en móviles */
+}
+.img {
+    width: 100%;
+}
+.container-restaurante__body__image {
+    width: 100%; /* Cambiado a 100% para ocupar todo el ancho en móviles */
+    margin-bottom: 10px; /* Añadido un margen inferior para separar la imagen del texto */
+}
+
+/* Media queries para pantallas más grandes */
+@media (min-width: 768px) {
+    .container-data {
+        margin-top: 110px ;
+    }
+    .container-restaurante {
+        flex-direction: column; /* Mantener columna en tabletas */
+    }
+
+    .container-restaurante__body {
+        flex-direction: row; /* Cambiar a fila en pantallas más grandes */
+        align-items: flex-start; /* Alinear al inicio en pantallas grandes */
+    }
+
+    .container-restaurante__body__info {
+        width: 50%;
+    }
+
+    .container-restaurante__body__image {
+        width: 50%;
+        margin-bottom: 0; /* Quitar margen inferior en pantallas grandes */
+    }
+
+    .container-restaurante.reversed .container-restaurante__body {
+        flex-direction: row-reverse; /* Invertir orden para la clase reversed */
+    }
+}
