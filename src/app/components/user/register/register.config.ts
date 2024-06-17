@@ -13,6 +13,7 @@ export const RegisterConfig = Object.freeze({
 
   enail: 'Correo electrónico:',
   password: 'Contraseña:',
+  passwordCofirm: 'Cofirmar Contraseña:',
   emailRequired: 'Falta el correo electrónico',
   emailInvalid: 'Formato de correo electrónico no valido',
   passwordInvalid: 'Falta la contraseña',
@@ -27,6 +28,8 @@ export const RegisterConfig = Object.freeze({
   phone: 'Teléfono',
   address: 'Dirección',
   errorPhone: 'Teléfono invalido',
-  refered: 'Codigo referido'
+  refered: 'Codigo referido',
+  titleAccountCreated:'Su cuenta ha sido creada',
+  messageAccountCreated:'Se ha enviado un correo de confirmación a su correo electrónico, por favor siga las instrucciones para activar su cuenta.',
 
 });

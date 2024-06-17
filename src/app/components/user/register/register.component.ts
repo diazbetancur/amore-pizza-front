@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterConfig } from './register.config';
 import { AuthService } from 'src/app/services/auth.service';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-
+  @ViewChild('content') content: TemplateRef<any> | undefined;
   public config = RegisterConfig;
   hidePassword: boolean = true;
   public loginForm = new FormGroup({
@@ -33,24 +35,27 @@ export class RegisterComponent {
   
 
   constructor(
-    private auth : AuthService
+    private auth : AuthService,
+    private modalService: NgbModal,
+    private router: Router
   ) {
     
   }
 
   public onRegister() {
-    this.auth.register(this.loginForm.value).subscribe({
-      next: (data) => {
-        if (!data) {
-          console.log('Mostrar un toast ARREGLARRRRRR POR FAVOR NO OLBIDAR INDICADOR CARGA')
-          return
+    this.auth.register(this.loginForm.value).subscribe(
+      result => {
+        console.log(result)
+        if (result.success) {
+          this.open()
+        } else {
+          console.log('User registration failed');
+          // Aquí puedes manejar el fallo en el registro
         }
-        console.log(data)
       },
-      error: (err) => {
-        console.log(err)
-      }      
-    })
+      error => {
+        console.log(error)
+      });
   }
 
 
@@ -75,4 +80,17 @@ export class RegisterComponent {
   get pass() {
     return this.loginForm.controls.password;
   }
+
+  public closeResult = ''
+
+  open() {
+		this.modalService.open(this.content, {centered: true , ariaLabelledBy: 'modal-basic-title' }).result.then(
+			(result) => {
+        this.router.navigate(['/home']);
+			},
+			(reason) => {
+        this.router.navigate(['/home']);
+			},
+		);
+	}
 }

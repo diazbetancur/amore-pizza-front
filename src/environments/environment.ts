@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url_API : 'https://localhost:7201/api/',
+  url_API : 'https://localhost:7027/api/',
+  //url_API : 'https://localhost:7201/api/',
   menu: [
     {
       title: "PIDE EN LINEA",
@@ -35,7 +36,7 @@ export const environment = {
       loged : false
     },
     {
-      title: "PRODUCTOS",
+      title: "Admi",
       link: '/login', 
       type: 'button',
       module: 'login',

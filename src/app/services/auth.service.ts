@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SharedService } from './shared.service';
 import { DataService } from './data.service';
-import { BehaviorSubject, Observable, catchError, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, of, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,72 +11,105 @@ export class AuthService {
   userToken: any = null;
   userData: any = null;
   expToken: number | any = null;
-  
-  currentUserLoginOn : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  currentUserData : BehaviorSubject<any> = new BehaviorSubject<any>({});
-  
+
+  currentUserLoginOn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
+  currentUserData: BehaviorSubject<any> = new BehaviorSubject<any>({});
+
   constructor(
     private _dataServ: DataService,
     private _http: HttpClient,
     private sharedService: SharedService
   ) {
-    //this.getCurrentUser();
+    this.getCurrentUser();
   }
 
   getCurrentUser() {
     const tokentUser = sessionStorage.getItem('AmorePizza');
-    const menu = sessionStorage.getItem('AmorePizzaMddenu');
-    console.log(menu)
+    //const menu = sessionStorage.getItem('AmorePizzaMddenu');
+    //console.log(menu);
     if (tokentUser) {
       this.userToken = tokentUser;
       this.decodeToken(this.userToken);
     }
   }
 
-  get userDataCurretnt() : Observable<any> {
+  get userDataCurretnt(): Observable<any> {
     return this.currentUserData.asObservable();
   }
 
-  get userLoginO() : Observable<any> {
+  get userLoginO(): Observable<any> {
     return this.currentUserLoginOn.asObservable();
   }
 
-  
-  login(formLogin: any) : Observable<any>{
+  login(formLogin: any): Observable<any> {
     formLogin['ip'] = this.sharedService.userIP;
     formLogin['device'] = this.sharedService.userDevice;
-    return this._http.post<any>(`${this._dataServ.baseURL}Account/Login`, formLogin).pipe(
-      tap( loginData => {
-        this.currentUserData.next(loginData);
-        this.currentUserLoginOn.next(true);
-      
-      }),
-      catchError( err => {
-        this.currentUserLoginOn.next(false);
-        return of(false);
+    return this._http
+      .post<any>(`${this._dataServ.baseURL}Account/Login`, formLogin)
+      .pipe(
+        map((response) => {
+          if (response.token != null) {
+            this.decodeToken(response.token);
+            this.expToken = response.expiration;
+            this.currentUserLoginOn.next(true);
+            return response;
+          } else 
+            console.log(response)
+          
+          return response.body;
+        }),
+        tap((loginData) => {
+          this.currentUserData.next(loginData);
+          
+        }),
+        catchError((err) => {
+          // Ajusta error contrasena
+          this.currentUserLoginOn.next(false);
+          if (err.error.errors[0] != null){
+            console.log(err.error.errors[0])          
+            return err.error.errors[0]
+          } else {
+            console.log(err.errors[0])
+            return err.error
+          }
+          
+          return of(false);
+          return err.message
+        })
+      );
+  }
+
+  register(fromRegister: any): Observable<any> {
+    fromRegister['ip'] = this.sharedService.userIP;
+    fromRegister['device'] = this.sharedService.userDevice;
+    fromRegister['phone'] = fromRegister['phone'].toString();
+    fromRegister['CityId'] = '1';
+    fromRegister['City'] = null;
+    fromRegister['UserType'] = 1;
+
+    return this._http
+      .post<any>(`${this._dataServ.baseURL}Account/CreateUser`, fromRegister, {
+        observe: 'response',
       })
-    )
-}
-
-register( fromRegister: any) : Observable<any> {
-  fromRegister['ip'] = this.sharedService.userIP;
-  fromRegister['device'] = this.sharedService.userDevice;
-  fromRegister['phone'] = fromRegister['phone'].toString();
-  fromRegister['Sex'] = "";
-
-  return this._http.post<any>(`${this._dataServ.baseURL}Account/Register`, fromRegister).pipe(
-    tap( registerData => {
-      this.currentUserData.next(registerData);
-      this.currentUserLoginOn.next(true);
-    }),
-    catchError( err => {
-      this.currentUserLoginOn.next(false);
-      return of(false);
-    })
-  )
-}
-
-
+      .pipe(
+        map((response) => {
+          if (response.status === 204) {
+            return {
+              success: true,
+              message:
+                'Debe confirmar su cuenta, al correo le llego un correo de confirmación.',
+            };
+          }
+          return response.body;
+        }),
+        catchError((err) => {
+          this.currentUserLoginOn.next(false);
+          return of(false);
+        })
+      );
+  }
 
   public async forgotPass(data: any) {
     let info = {
@@ -103,6 +136,9 @@ register( fromRegister: any) : Observable<any> {
       .toPromise();
   }
 
+  public TokenDecode(token: string){
+
+  }
   public decodeToken(token: string, changePass?: boolean) {
     var base64Url = token.split('.')[1];
     var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -116,13 +152,12 @@ register( fromRegister: any) : Observable<any> {
     );
     let tokenData = JSON.parse(jsonPayload);
     this.userData = {
-      UserId: tokenData.UserId,
-      UserName: tokenData.UserName,
+      Name: tokenData.Name,
       LastName: tokenData.LastName,
-      Role: tokenData.Role,
-      Email: tokenData.Email,
+      Role: tokenData['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'],
+      Email: tokenData['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
+      Photo: tokenData.Photo
     };
-    this.expToken = tokenData.exp;
     if (changePass === true) {
       //this._dataServ.goTo('/authentication/changepassword');
     } else {

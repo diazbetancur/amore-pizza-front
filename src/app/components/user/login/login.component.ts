@@ -44,14 +44,13 @@ export class LoginComponent {
 	{
 		this.login.login(this.loginForm.value).subscribe({
 			next: (data) => {
-				if (!data) {
-					console.log('Mostrar un toast ARREGLARRRRRR POR FAVOR NO OLBIDAR INDICADOR CARGA')
-					return
-				}
-				sessionStorage.setItem('AmorePizza', data.result.token);
-				sessionStorage.setItem('AmorePizzaMenu', data.result.moduleRoleResponse);
-				this.login.userToken = data.result.token;
 				console.log(data)
+				if (data.token != null) {
+					console.log('Mostrar un toast ARREGLARRRRRR POR FAVOR NO OLBIDAR INDICADOR CARGA')
+					sessionStorage.setItem('AmorePizza', data.token);
+				}
+				
+				//sessionStorage.setItem('AmorePizzaMenu', data.result.moduleRoleResponse);
 			},
 			error: (err) => {
 				console.log(err)
